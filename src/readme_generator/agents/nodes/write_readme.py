@@ -12,7 +12,7 @@ def write_readme(state: ReadmeState):
     Technical analysis:
     {state["analysis"]}
 
-    {[review for review in state["reviews"].feedback] if state["reviews"] else ""}
+    {state["reviews"][-1]["feedback"] if state["reviews"] else ""}
 
     Rules:
     - Use Markdown

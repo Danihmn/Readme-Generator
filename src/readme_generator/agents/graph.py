@@ -18,7 +18,7 @@ builder.add_node("human_approval", human_approval)
 def _should_rewrite_readme_decided_by_llm(state: ReadmeState) -> Literal["analyze_code", "human_approval"]:
     """The LLM reviews the generated README.md and decide if it's great or not"""
     reviews = state["reviews"]
-    if reviews[len(reviews) - 1].score <= 7:
+    if reviews[-1]["score"] < 7:
         return "analyze_code"
     return "human_approval"
 
