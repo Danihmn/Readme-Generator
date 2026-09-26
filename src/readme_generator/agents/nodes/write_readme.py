@@ -25,5 +25,6 @@ def write_readme(state: ReadmeState):
 
     response = chat_ollama.invoke(prompt)
     return {
-        "readme_draft": response.content if response else ""
+        "readme_draft": response.content if response else "",
+        "messages": [prompt, response],
     }

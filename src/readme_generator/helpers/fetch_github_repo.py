@@ -17,8 +17,10 @@ def parse_repo_url(url: str) -> str:
 
 def fetch_github_repo(repo_url: str) -> dict:
     token = os.getenv("GITHUB_TOKEN")
-    auth = Auth.Token(token) if token else None
-    github = Github(auth=auth)
+    if not token:
+        raise ValueError("GITHUB_TOKEN not found. Check your .env file.")
+
+    github = Github(auth=Auth.Token(token))
 
     try:
         repo = github.get_repo(parse_repo_url(repo_url))

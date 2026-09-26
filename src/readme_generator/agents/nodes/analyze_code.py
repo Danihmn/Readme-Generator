@@ -22,4 +22,4 @@ def analyze_code(state: ReadmeState):
     Only describe what you can see in the files. If something is not clear, write "not found" instead of guessing."""
 
     response = chat_ollama.invoke(prompt)
-    return {"analysis": response.content if response else "not found"}
+    return {"analysis": response.content if response else "not found", "messages": [prompt, response]}
