@@ -1,11 +1,13 @@
 from typing import Literal
 
+from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.constants import START
 from langgraph.graph import StateGraph
 
 from readme_generator.agents.nodes import fetch_repo, analyze_code, write_readme, review, human_approval
 from readme_generator.agents.readme_state import ReadmeState
 
+checkpointer = InMemorySaver()
 builder = StateGraph(ReadmeState)
 
 builder.add_node("fetch_repo", fetch_repo)
@@ -32,4 +34,4 @@ builder.add_conditional_edges(
     _should_rewrite_readme_decided_by_llm,
     ["analyze_code", "human_approval"])
 
-readme_generator_agent = builder.compile()
+readme_generator_agent = builder.compile(checkpointer=checkpointer)

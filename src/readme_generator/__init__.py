@@ -1,5 +1,7 @@
 import json
+import threading
 
+from langchain_core.runnables import RunnableConfig
 from load_dotenv import load_dotenv
 from langchain_core.messages import messages_to_dict
 
@@ -22,7 +24,10 @@ initial_state: ReadmeState = {
     "human_feedback": None,
 }
 
-response = readme_generator_agent.invoke(initial_state)
+config = RunnableConfig(configurable={
+    "thread_id": threading.get_ident(),
+})
+response = readme_generator_agent.invoke(initial_state, config=config)
 
 output = {**response, "messages": messages_to_dict(response["messages"])}
 print(json.dumps(output, indent=4, ensure_ascii=False))
