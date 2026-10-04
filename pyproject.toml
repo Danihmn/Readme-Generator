@@ -11,7 +11,9 @@ dependencies = [
     "langchain>=1.4.2",
     "langchain-ollama>=1.1.0",
     "langgraph>=1.2.12",
+    "langgraph-checkpoint-postgres>=3.1.2",
     "load-dotenv>=0.1.0",
+    "psycopg[binary]>=3.3.6",
     "pygithub>=2.10.0",
 ]
 
